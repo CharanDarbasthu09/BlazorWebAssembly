@@ -1,6 +1,6 @@
 <AuthorizeView>
   <Authorized>
-    <p>context.User.Claims.FirstOrDefault()?.Value</p>
+    Hello, @context.User?.Identity?.Name!
     <a href="Account/Logout">Log out</a>
   </Authorized>
   <NotAuthorized>
