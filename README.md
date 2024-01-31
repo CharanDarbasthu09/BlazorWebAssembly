@@ -2,6 +2,12 @@ This repository contains a Blazor Web application with Interactive Auto render m
 
 The following article describes the implementation details: [Add Auth0 Authentication to Blazor Web Apps](https://auth0.com/blog/auth0-authentication-blazor-web-apps/).
 
+## Features implemented
+1. Interacting BlazorIntAuto application with Auth0
+2. Added minimal test cases
+3. Added a Dashboard with user(client) information of Auth0 and hardcoded images
+
+
 ## To run the applications:
 
 Clone the repo: `git clone https://github.com/auth0-blog/blazor-interactive-auto.git`
