@@ -1,9 +1,10 @@
 <AuthorizeView>
   <Authorized>
-    <p>context.User.Claims[0]</p>
+    <p>context.User.Claims.FirstOrDefault()?.Value</p>
+    <a href="Account/Logout">Log out</a>
   </Authorized>
   <NotAuthorized>
-    <a href="Account/Login?redirectUri=/">Log in</a>
+    <a id="login" href="Account/Login?redirectUri=/">Log in</a>
   </NotAuthorized>
 </AuthorizeView>
 
