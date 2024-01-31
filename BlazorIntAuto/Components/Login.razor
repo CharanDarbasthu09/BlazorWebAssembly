@@ -1,0 +1,25 @@
+@* <AuthorizeView>
+    <Authorized>
+        <a href="Account/Logout">Log out</a>
+    </Authorized>
+    <NotAuthorized>
+        <a href="Account/Login?redirectUri=/">Log in</a>
+    </NotAuthorized>
+</AuthorizeView> *@
+
+
+<AuthorizeView>
+  <Authorized>
+    @foreach (var claim in context.User.Claims)
+    {
+      <p>@claim.Type - @claim.Value</p>
+    }
+  </Authorized>
+  <NotAuthorized>
+    <a href="weather">Log in</a>
+  </NotAuthorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Administrator">
+  Only Administrators can see this.
+</AuthorizeView>
