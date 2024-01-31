@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using BlazorIntAuto.Data
+@inject HttpClient Http
 
 <PageTitle>Home</PageTitle>
 <AuthorizeView>
@@ -13,6 +15,20 @@
         }
       </tbody>
     </table>
+    <div>
+      <h1>Dashboard</h1>
+    </div>
+    @if (images == null)
+    {
+      <h1>Loading dashboard images...</h1>
+    }
+    else
+    {
+      @foreach (var image in images)
+      {
+        <img src="@image.Image" asp-append-version="true" width="300px" />
+      }
+    }
   </Authorized>
   <NotAuthorized>
     <h1>Hello!</h1>
@@ -24,3 +40,64 @@
 <AuthorizeView Roles="Administrator">
   Only Administrators can see this.
 </AuthorizeView>
+
+@code {
+  private List<SampleImage> images;
+
+  protected override async Task OnInitializedAsync()
+  {
+    // images = await Http.GetJsonAsync<SampleImage[]>("/sampleimages.json"); // to be added
+
+    images = new List<SampleImage>();
+
+    images.Add(new SampleImage
+      {
+        Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/pang/HfReHl5.jpg",
+        Info = "HfReHl5.jpg",
+        Size = "600x400"
+      });
+    images.Add(new SampleImage
+      {
+        Image = "https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/car_3.png",
+        Info = "car_3.png",
+        Size = "500x307"
+      });
+    images.Add(new SampleImage
+      {
+        Image = "https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/tree_1.png",
+        Info = "tree_1.png",
+        Size = "374x585"
+      });
+    images.Add(new SampleImage
+      {
+        Image = "https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/start.png",
+        Info = "start.png",
+        Size = "520x361"
+      });
+    images.Add(new SampleImage
+      {
+        Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/descent/zombie_381_48.png",
+        Info = "zombie_381_48.png",
+        Size = "381x48"
+      });
+    images.Add(new SampleImage
+      {
+        Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/descent/person2.png",
+        Info = "person2.png",
+        Size = "632x437"
+      });
+    images.Add(new SampleImage
+      {
+        Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/pang/HfReHl5.jpg",
+        Info = "HfReHl5.jpg",
+        Size = "600x400"
+      });
+    images.Add(new SampleImage
+      {
+        Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/pang/HfReHl5.jpg",
+        Info = "HfReHl5.jpg",
+        Size = "600x400"
+      });
+
+  }
+}
