@@ -52,63 +52,57 @@
 </AuthorizeView>
 
 @code {
-  private List<SampleImage> images;
-
-
-  private Task OnClick(MouseEventArgs e)
-  {
-    throw new NotImplementedException();
-  }
+  private List<DashboardImage> images;
 
   protected override async Task OnInitializedAsync()
   {
-    // images = await Http.GetJsonAsync<SampleImage[]>("/sampleimages.json");
+    // images = await Http.GetJsonAsync<DashboardImage[]>("/dashboardimages.json");
 
-    images = new List<SampleImage>();
+    images = new List<DashboardImage>();
 
-    images.Add(new SampleImage
+    images.Add(new DashboardImage
       {
         Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/pang/HfReHl5.jpg",
         Info = "HfReHl5.jpg",
         Size = "600x400"
       });
-    images.Add(new SampleImage
+    images.Add(new DashboardImage
       {
         Image = "https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/car_3.png",
         Info = "car_3.png",
         Size = "500x307"
       });
-    images.Add(new SampleImage
+    images.Add(new DashboardImage
       {
         Image = "https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/tree_1.png",
         Info = "tree_1.png",
         Size = "374x585"
       });
-    images.Add(new SampleImage
+    images.Add(new DashboardImage
       {
         Image = "https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/start.png",
         Info = "start.png",
         Size = "520x361"
       });
-    images.Add(new SampleImage
+    images.Add(new DashboardImage
       {
         Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/descent/zombie_381_48.png",
         Info = "zombie_381_48.png",
         Size = "381x48"
       });
-    images.Add(new SampleImage
+    images.Add(new DashboardImage
       {
         Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/descent/person2.png",
         Info = "person2.png",
         Size = "632x437"
       });
-    images.Add(new SampleImage
+    images.Add(new DashboardImage
       {
         Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/pang/HfReHl5.jpg",
         Info = "HfReHl5.jpg",
         Size = "600x400"
       });
-    images.Add(new SampleImage
+    images.Add(new DashboardImage
       {
         Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/pang/HfReHl5.jpg",
         Info = "HfReHl5.jpg",
