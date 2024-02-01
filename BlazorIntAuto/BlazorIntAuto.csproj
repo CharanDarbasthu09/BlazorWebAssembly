@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.4.0" />
+    <PackageReference Include="Blazored.Modal" Version="7.2.0" />
+    <PackageReference Include="BlazorTooltips" Version="7.1.0" />
     <PackageReference Include="MatBlazor" Version="2.10.0" />
     <ProjectReference Include="..\BlazorIntAuto.Client\BlazorIntAuto.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />

@@ -1,6 +1,8 @@
 ﻿@page "/"
 @using BlazorIntAuto.Data
 @inject HttpClient Http
+@using BlazorTooltips
+@inject IModalService modal 
 
 <PageTitle>Home</PageTitle>
 <AuthorizeView>
@@ -26,7 +28,15 @@
     {
       @foreach (var image in images)
       {
-        <img src="@image.Image" asp-append-version="true" width="300px" />
+        <div>
+          <img src="@image.Image" asp-append-version="true" width="300px" />
+          <Tooltip Title="Details tooltip"
+                   Placement="TooltipPlacement.Bottom"
+                   Animation="true">
+            <button type="btn btn-primary" class="btn btn-primary">Details</button>
+          </Tooltip>
+        </div>
+
       }
     }
   </Authorized>
@@ -44,9 +54,15 @@
 @code {
   private List<SampleImage> images;
 
+
+  private Task OnClick(MouseEventArgs e)
+  {
+    throw new NotImplementedException();
+  }
+
   protected override async Task OnInitializedAsync()
   {
-    // images = await Http.GetJsonAsync<SampleImage[]>("/sampleimages.json"); // to be added
+    // images = await Http.GetJsonAsync<SampleImage[]>("/sampleimages.json");
 
     images = new List<SampleImage>();
 
