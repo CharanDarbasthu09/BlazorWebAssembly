@@ -2,7 +2,9 @@
 @using BlazorIntAuto.Data
 @inject HttpClient Http
 @using BlazorTooltips
-@inject IModalService modal 
+@using System.Text.Json
+@inject IModalService modal
+@inject ILogger<Home> Logger
 
 <PageTitle>Home</PageTitle>
 <AuthorizeView>
@@ -20,13 +22,13 @@
     <div>
       <h1>Dashboard</h1>
     </div>
-    @if (images == null)
+    @if (dashboardImages == null)
     {
       <h1>Loading dashboard images...</h1>
     }
     else
     {
-      @foreach (var image in images)
+      @foreach (var image in dashboardImages)
       {
         <div>
           <img src="@image.Image" asp-append-version="true" width="300px" />
@@ -52,62 +54,34 @@
 </AuthorizeView>
 
 @code {
-  private List<DashboardImage> images;
+  private DashboardImage[] dashboardImages = null;
+
+  [CascadingParameter]
+  private Task<AuthenticationState> authStateTask { get; set; }
 
   protected override async Task OnInitializedAsync()
   {
-    // images = await Http.GetJsonAsync<DashboardImage[]>("/dashboardimages.json");
+    base.OnInitialized();
 
-    images = new List<DashboardImage>();
+    try
+    {
+      var authstate = await authStateTask;
 
-    images.Add(new DashboardImage
+      if (authstate.User.Claims.FirstOrDefault() != null)
       {
-        Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/pang/HfReHl5.jpg",
-        Info = "HfReHl5.jpg",
-        Size = "600x400"
-      });
-    images.Add(new DashboardImage
-      {
-        Image = "https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/car_3.png",
-        Info = "car_3.png",
-        Size = "500x307"
-      });
-    images.Add(new DashboardImage
-      {
-        Image = "https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/tree_1.png",
-        Info = "tree_1.png",
-        Size = "374x585"
-      });
-    images.Add(new DashboardImage
-      {
-        Image = "https://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/img/start.png",
-        Info = "start.png",
-        Size = "520x361"
-      });
-    images.Add(new DashboardImage
-      {
-        Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/descent/zombie_381_48.png",
-        Info = "zombie_381_48.png",
-        Size = "381x48"
-      });
-    images.Add(new DashboardImage
-      {
-        Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/descent/person2.png",
-        Info = "person2.png",
-        Size = "632x437"
-      });
-    images.Add(new DashboardImage
-      {
-        Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/pang/HfReHl5.jpg",
-        Info = "HfReHl5.jpg",
-        Size = "600x400"
-      });
-    images.Add(new DashboardImage
-      {
-        Image = "https://codeskulptor-demos.commondatastorage.googleapis.com/pang/HfReHl5.jpg",
-        Info = "HfReHl5.jpg",
-        Size = "600x400"
-      });
+        var images = System.IO.File.ReadAllText($"{System.IO.Directory.GetCurrentDirectory()}{@"\wwwroot\data\dashboardimages.json"}");
 
+        if (images!=null)
+        {
+          dashboardImages = JsonSerializer.Deserialize<DashboardImage[]>(images);
+
+          Logger.LogInformation(images);
+        }
+      }
+    }
+    catch (Exception ex)
+    {
+      Logger.LogError(ex.Message);
+    }
   }
 }
